@@ -1,6 +1,8 @@
 package com.donboots.flickster.adapters;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.drawable.GradientDrawable;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,8 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
     public View getView(int position, View convertView, ViewGroup parent) {
         Movie movie = getItem(position);
         ViewHolder viewHolder;
+        int orientation;
+        String movieImage;
 
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
@@ -42,7 +46,10 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         viewHolder.tvTitle.setText(movie.getOriginalTitle());
         viewHolder.tvOverview.setText(movie.getOverview());
 
-        Picasso.with(getContext()).load(movie.getPosterPath()).into(viewHolder.ivImage);
+        orientation = getContext().getResources().getConfiguration().orientation;
+        movieImage = (orientation == Configuration.ORIENTATION_PORTRAIT) ? movie.getBackdropPath() : movie.getPosterPath();
+
+        Picasso.with(getContext()).load(movieImage).into(viewHolder.ivImage);
 
         return convertView;
     }

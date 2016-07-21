@@ -10,11 +10,15 @@ public class Movie {
     String posterPath;
     String originalTitle;
     String overview;
+    String backdropPath;
+
+    String baseImageUrl = "https://image.tmdb.org/t/p/w342/";
 
     public Movie(JSONObject jsonObject) throws JSONException {
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
+        this.backdropPath = jsonObject.getString("backdrop_path");
     }
 
     public static ArrayList<Movie> fromJSONArray(JSONArray jsonArray) {
@@ -31,8 +35,12 @@ public class Movie {
         return results;
     }
 
+    public String getBackdropPath() {
+        return baseImageUrl + posterPath;
+    }
+
     public String getPosterPath() {
-        return String.format("https://image.tmdb.org/t/p/w342/%s", posterPath);
+        return baseImageUrl + backdropPath;
     }
 
     public String getOriginalTitle() {
