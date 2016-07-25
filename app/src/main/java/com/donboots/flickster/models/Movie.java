@@ -11,6 +11,7 @@ public class Movie {
     String originalTitle;
     String overview;
     String backdropPath;
+    Double voteAverage;
 
     String baseImageUrl = "https://image.tmdb.org/t/p/w342/";
 
@@ -19,6 +20,7 @@ public class Movie {
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
         this.backdropPath = jsonObject.getString("backdrop_path");
+        this.voteAverage = jsonObject.getDouble("vote_average");
     }
 
     public static ArrayList<Movie> fromJSONArray(JSONArray jsonArray) {
@@ -36,18 +38,16 @@ public class Movie {
     }
 
     public String getBackdropPath() {
-        return baseImageUrl + posterPath;
-    }
-
-    public String getPosterPath() {
         return baseImageUrl + backdropPath;
     }
-
+    public String getPosterPath() {
+        return baseImageUrl + posterPath;
+    }
     public String getOriginalTitle() {
         return originalTitle;
     }
-
     public String getOverview() {
         return overview;
     }
+    public Double getVoteAverage() { return voteAverage; }
 }
